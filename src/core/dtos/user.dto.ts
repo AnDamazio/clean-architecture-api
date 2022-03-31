@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsDate } from 'class-validator';
+import { PersonalData } from './../entities/personal-data.entity';
+import { IsString, IsNotEmpty, IsDate, IsInstance } from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -8,4 +9,8 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   lastName: string;
+
+  @IsInstance(PersonalData)
+  @IsNotEmpty()
+  personalData: PersonalData;
 }

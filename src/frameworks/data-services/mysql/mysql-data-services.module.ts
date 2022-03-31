@@ -1,13 +1,13 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { IDataServices } from "src/core";
-import { User } from "./model";
+import { User, PersonalData } from "./model";
 import { MysqlDataServices } from "./mysql-data-services.service";
 import("dotenv/config");
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    TypeOrmModule.forFeature([User, PersonalData]),
     TypeOrmModule.forRoot({
       type: "mysql",
       host: "localhost",

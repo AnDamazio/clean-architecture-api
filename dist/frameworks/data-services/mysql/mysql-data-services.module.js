@@ -18,13 +18,13 @@ let MysqlDataServicesModule = class MysqlDataServicesModule {
 MysqlDataServicesModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forFeature([model_1.User]),
+            typeorm_1.TypeOrmModule.forFeature([model_1.User, model_1.PersonalData]),
             typeorm_1.TypeOrmModule.forRoot({
                 type: "mysql",
-                host: process.env.HOSTNAME,
-                port: process.env.PORT,
-                username: process.env.USERNAME,
-                password: process.env.PASSWORD,
+                host: "localhost",
+                port: 3306,
+                username: "root",
+                password: "",
                 database: "clean_teste",
                 entities: [__dirname + "/../**/*.model{.ts,.js}"],
                 synchronize: true,

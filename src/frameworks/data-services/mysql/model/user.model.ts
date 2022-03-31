@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm"
+import { PersonalData } from "./personal-data.model"
 
 @Entity()
 export class User {
@@ -10,4 +11,8 @@ export class User {
 
     @Column()
     lastName: string
+
+    @OneToOne(() => PersonalData)
+    @JoinColumn()
+    personalData: PersonalData
 }

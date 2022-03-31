@@ -13,23 +13,32 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
+const personal_data_services_service_1 = require("./../services/use-cases/personal-data/personal-data-services.service");
+const personal_data_factory_service_1 = require("./../services/use-cases/personal-data/personal-data-factory.service");
 const common_1 = require("@nestjs/common");
 const dtos_1 = require("../core/dtos");
 const user_1 = require("../services/use-cases/user");
 let UserController = class UserController {
-    constructor(userServices, userFactoryService) {
+    constructor(userServices, userFactoryService, personalDataServices, personalDataFactoryService) {
         this.userServices = userServices;
         this.userFactoryService = userFactoryService;
+        this.personalDataServices = personalDataServices;
+        this.personalDataFactoryService = personalDataFactoryService;
     }
     async createUser(userDto) {
         const createUserResponse = new dtos_1.CreateUserResponseDto();
+        console.log(userDto);
         try {
+            const personalData = this.personalDataFactoryService.createNewPersonalData(userDto.personalData);
+            const createdPersonalData = await this.personalDataServices.createPersonalData(personalData);
+            userDto.personalData = createdPersonalData;
             const user = this.userFactoryService.createNewUser(userDto);
             const createdUser = await this.userServices.createUser(user);
             createUserResponse.success = true;
             createUserResponse.createdUser = createdUser;
         }
         catch (error) {
+            console.log(error);
             createUserResponse.success = false;
         }
         return createUserResponse;
@@ -45,7 +54,9 @@ __decorate([
 UserController = __decorate([
     (0, common_1.Controller)('api/user'),
     __metadata("design:paramtypes", [user_1.UserServices,
-        user_1.UserFactoryService])
+        user_1.UserFactoryService,
+        personal_data_services_service_1.PersonalDataServices,
+        personal_data_factory_service_1.PersonalDataFactoryService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map

@@ -14,6 +14,7 @@ let UserFactoryService = class UserFactoryService {
         const newUser = new entities_1.User();
         newUser.firstName = createUserDto.firstName;
         newUser.lastName = createUserDto.lastName;
+        newUser.personalData = createUserDto.personalData;
         return newUser;
     }
 };

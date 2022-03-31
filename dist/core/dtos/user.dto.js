@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateUserDto = void 0;
+const personal_data_entity_1 = require("./../entities/personal-data.entity");
 const class_validator_1 = require("class-validator");
 class CreateUserDto {
 }
@@ -23,5 +24,10 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "lastName", void 0);
+__decorate([
+    (0, class_validator_1.IsInstance)(personal_data_entity_1.PersonalData),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", personal_data_entity_1.PersonalData)
+], CreateUserDto.prototype, "personalData", void 0);
 exports.CreateUserDto = CreateUserDto;
 //# sourceMappingURL=user.dto.js.map
